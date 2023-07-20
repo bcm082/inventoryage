@@ -62,7 +62,7 @@ past30 = past30.set_index("sku")
 def export_df(df):
     """Export the DataFrame to a CSV file."""
     csv_file = df.to_csv(index=False)
-    return st.download_button(label="Export DataFrame", data=csv_file, file_name="download.csv", mime="text/csv", key=None)
+    return st.download_button(label="Export to CSV", data=csv_file, file_name="download.csv", mime="text/csv", key=None)
 
 # Display df when Past 7 is selected
 if days == "Past 7":
