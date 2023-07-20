@@ -1,10 +1,5 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-
-
-
 
 # Create a dropdown list with the following options past 7, past 14, past 30 days
 st.sidebar.title("Inventory Age")
@@ -69,31 +64,11 @@ def export_df(df):
     csv_file = df.to_csv(index=False)
     return st.download_button(label="Export DataFrame", data=csv_file, file_name="download.csv", mime="text/csv", key=None)
 
-# Graphs
-def plot_inventory(df):
-    # Make sure to not modify the original dataframe
-    df = df.copy()
-    # Create a new column to calculate the percentage of inventory sold
-    df["percent_sold"] = df["total_sold"] / df["in_stock"]
-    # Create a new column to calculate the percentage of inventory remaining
-    df["percent_remaining"] = 1 - df["percent_sold"]
-    # Display the top 20 in a graph
-    top10 = df.head(20)
-    # Create a bar graph to display the percentage of inventory sold
-    fig, ax = plt.subplots()
-    ax.barh(top10.index, top10["percent_sold"], color="green")
-    ax.set_title("Percentage of Inventory Sold")
-    ax.set_xlabel("Percentage")
-    ax.set_ylabel("SKU")
-
-    st.pyplot(fig)
-
-
-
 # Display df when Past 7 is selected
 if days == "Past 7":
     st.title("Past 7 Days")
     st.text("*Data updates every Monday")
+    st.text("*Starting September 2023, data will update every 3 days")
     # Create a search bar to search for sku
     search = st.text_input("Search")
     # Filter the data based on the SKU or title entered based on partial match
@@ -113,11 +88,6 @@ if days == "Past 7":
     # Export df to csv
     export_df(filtered_df)
 
-    st.markdown("---")
-    st.subheader("Percentage of Inventory Sold (top 20)")
-
-    # Display graph
-    plot_inventory(filtered_df)
 
 
 
@@ -125,6 +95,7 @@ if days == "Past 7":
 if days == "Past 14":
     st.title("Past 14 Days")
     st.text("*Data updates every Monday")
+    st.text("*Starting September 2023, data will update every 3 days")
     search = st.text_input("Search")
     # Filter the data based on the SKU or title entered based on partial match
     if search:
@@ -141,14 +112,14 @@ if days == "Past 14":
 
     # Export df to csv
     export_df(filtered_df)
-    # Display graph
-    plot_inventory(filtered_df)
+
 
 
 # Display df when Past 21 is selected
 if days == "Past 21":
     st.title("Past 21 Days")
     st.text("*Data updates every Monday")
+    st.text("*Starting September 2023, data will update every 3 days")
     search = st.text_input("Search")
     # Filter the data based on the SKU or title entered based on partial match
     if search:
@@ -165,14 +136,14 @@ if days == "Past 21":
 
     # Export df to csv
     export_df(filtered_df)
-    # Display graph
-    plot_inventory(filtered_df)
+
 
 
 # Display df when Past 30 is selected
 if days == "Past 30":
     st.title("Past 30 Days")
     st.text("*Data updates every Monday")
+    st.text("*Starting September 2023, data will update every 3 days")
     search = st.text_input("Search")
     # Filter the data based on the SKU or title entered based on partial match
     if search:
@@ -189,8 +160,7 @@ if days == "Past 30":
 
     # Export df to csv
     export_df(filtered_df)
-    # Display graph
-    plot_inventory(filtered_df)
+
 
 
 
