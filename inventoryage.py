@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 
+st.set_wide_mode()
+
 # Create a dropdown list with the following options past 7, past 14, past 30 days
 st.sidebar.title("Inventory Age")
 st.sidebar.subheader("Select the number of days to view")
